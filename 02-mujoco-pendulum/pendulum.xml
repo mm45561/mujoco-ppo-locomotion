@@ -5,4 +5,7 @@
       <geom type="capsule" fromto="0 0 0 0 0 -0.5" size="0.02"/>
     </body>
   </worldbody>
+  <actuator>
+    <position joint="hinge" kp="20" kv="1"/>
+  </actuator>
 </mujoco>
