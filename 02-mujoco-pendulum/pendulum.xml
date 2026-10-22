@@ -1,7 +1,7 @@
 <mujoco>
   <worldbody>
     <body pos="0 0 1">
-      <joint name="hinge" type="hinge" axis="0 1 0"/>
+      <joint name="hinge" type="hinge" axis="0 1 0" damping="0.05"/>
       <geom type="capsule" fromto="0 0 0 0 0 -0.5" size="0.02"/>
     </body>
   </worldbody>
