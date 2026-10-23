@@ -6,6 +6,6 @@
     </body>
   </worldbody>
   <actuator>
-    <position joint="hinge" kp="20" kv="1"/>
+    <position joint="hinge" kp="100" kv="1"/>
   </actuator>
 </mujoco>
