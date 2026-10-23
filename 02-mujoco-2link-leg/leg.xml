@@ -1,0 +1,16 @@
+<mujoco>
+  <worldbody>
+    <body name="thigh" pos="0 0 1">
+      <joint name="hip" type="hinge" axis="0 1 0" damping="0.05"/>
+      <geom type="capsule" fromto="0 0 0 0 0 -0.4" size="0.02"/>
+      <body name="shin" pos="0 0 -0.4">
+        <joint name="knee" type="hinge" axis="0 1 0" damping="0.05"/>
+        <geom type="capsule" fromto="0 0 0 0 0 -0.4" size="0.02"/>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <position joint="hip" kp="100" kv="1"/>
+    <position joint="knee" kp="100" kv="1"/>
+  </actuator>
+</mujoco>
