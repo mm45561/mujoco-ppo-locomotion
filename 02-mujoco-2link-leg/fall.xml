@@ -1,0 +1,13 @@
+<mujoco>
+  <worldbody>
+    <geom type="plane" size="2 2 0.1"/>
+    <body name="thigh" pos="0 0 1">
+      <freejoint/>
+      <geom type="capsule" fromto="0 0 0 0 0 -0.4" size="0.02"/>
+      <body name="shin" pos="0 0 -0.4">
+        <joint name="knee" type="hinge" axis="0 1 0" damping="0.05"/>
+        <geom type="capsule" fromto="0 0 0 0 0 -0.4" size="0.02"/>
+      </body>
+    </body>
+  </worldbody>
+</mujoco>
