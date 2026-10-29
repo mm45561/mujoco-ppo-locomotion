@@ -56,3 +56,23 @@ uv run python 03-rl-pendulum-balance/play.py
 ```
 
 *Built step by step with guidance from Claude, as part of my own learning project.*
+
+## REINFORCE vs PPO
+Same task, same environment, same policy size (3 inputs, 32 hidden units, 1 output).
+`train_ppo.py` changes the learning rule in three ways:
+- a **critic** network estimates the expected future reward, so each action is judged by
+  how much better it turned out than expected (the advantage)
+- the update is **clipped**: an action's probability can change by about 20% at most per update
+- each batch of data is used for **4 learning passes** instead of one
+
+| | REINFORCE | PPO |
+|---|---|---|
+| First reached 200 steps | update 40 | update 60 |
+| After reaching 200 | dipped twice (194 at update 90, 161 at update 180) | stayed at 200 until update 200 |
+| Learning rate | 0.01 | 0.003 |
+
+PPO is slower to start but stable once it has learned: it does not suffer the sudden
+drops that REINFORCE showed. This is one run of each, with the average printed every
+10 updates, so it is a first impression and not a statistical comparison.
+
+Extra files: `train_ppo.py` and `policy_ppo.pt` (the PPO policy weights).
