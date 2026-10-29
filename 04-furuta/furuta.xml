@@ -1,0 +1,30 @@
+<mujoco>
+  <option timestep="0.002"/>
+  <visual>
+    <headlight ambient="0.4 0.4 0.4" diffuse="0.8 0.8 0.8"/>
+  </visual>
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.6 0.75 0.9" rgb2="0.05 0.08 0.15" width="512" height="512"/>
+    <texture name="grid" type="2d" builtin="checker" rgb1="0.2 0.28 0.28" rgb2="0.3 0.4 0.4" width="300" height="300" mark="edge" markrgb="0.45 0.55 0.55"/>
+    <material name="grid" texture="grid" texrepeat="6 6" reflectance="0.15"/>
+  </asset>
+  <worldbody>
+    <light pos="1 -1 2" dir="-0.4 0.4 -1"/>
+    <geom type="plane" size="1 1 0.1" material="grid"/>
+    <!-- visual only: base, body and motor housing -->
+    <geom type="cylinder" fromto="0 0 0 0 0 0.05" size="0.17" rgba="0.1 0.25 0.6 1" contype="0" conaffinity="0"/>
+    <geom type="cylinder" fromto="0 0 0.05 0 0 0.22" size="0.11" rgba="0.15 0.35 0.75 1" contype="0" conaffinity="0"/>
+    <geom type="cylinder" fromto="0 0 0.22 0 0 0.31" size="0.07" rgba="0.2 0.2 0.22 1" contype="0" conaffinity="0"/>
+    <body name="arm" pos="0 0 0.32">
+      <joint name="arm_joint" type="hinge" axis="0 0 1" damping="0.002"/>
+      <geom type="capsule" fromto="0 0 0 0.2 0 0" size="0.015" rgba="0.75 0.75 0.8 1"/>
+      <body name="pend" pos="0.2 0 0">
+        <joint name="pend_joint" type="hinge" axis="1 0 0" damping="0.0002"/>
+        <geom type="capsule" fromto="0 0 0 0 0 0.3" size="0.01" rgba="0.95 0.3 0.1 1"/>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <motor joint="arm_joint" ctrllimited="true" ctrlrange="-0.15 0.15"/>
+  </actuator>
+</mujoco>

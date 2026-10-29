@@ -18,7 +18,7 @@ with mujoco.viewer.launch_passive(env.model, env.data) as viewer:
     viewer.cam.lookat[:] = [0, 0, 1.25]  # look at the middle of the rod
     viewer.cam.distance = 2.5            # how far the camera is
     viewer.cam.azimuth = 90              # side view
-    viewer.cam.elevation = 0             # level with the rod:
+    viewer.cam.elevation = -15            # level with the rod:
     while viewer.is_running():
         with torch.no_grad():
             action = net(torch.from_numpy(obs)).item()  # the policy's best guess

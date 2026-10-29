@@ -31,7 +31,7 @@ The motor is limited to ±1 N·m, which is weaker than gravity when the rod is h
 |---|---|
 | Random torques | 29.7 |
 | Hand-written PD controller (kp=8, kd=1) | 200 |
-| REINFORCE policy | reaches 200 after about 40 updates |
+| REINFORCE policy | survives 200 steps after about 40 updates, but rests tilted at about 21 degrees |
 
 During training the average episode length went from 36 at the start to 200 at update 40.
 It dipped twice later (194 at update 90, 161 at update 180) before recovering.
@@ -76,3 +76,20 @@ drops that REINFORCE showed. This is one run of each, with the average printed e
 10 updates, so it is a first impression and not a statistical comparison.
 
 Extra files: `train_ppo.py` and `policy_ppo.pt` (the PPO policy weights).
+
+## A correction: surviving is not the same as upright
+"200 steps" only means the rod never tilted past 0.8 rad. It does not mean the rod is upright.
+I measured where each policy holds the rod over the last 50 steps of 20 episodes
+(`measure_angle.py`):
+
+| Policy | Rests at |
+|---|---|
+| REINFORCE | -0.360 rad (-20.6 degrees) |
+| PPO | -0.115 rad (-6.6 degrees) |
+
+The reward `cos(angle)` is almost flat near upright (0.94 at 20 degrees, 1.0 at 0 degrees),
+so a policy collects nearly the full reward by holding a tilt. The agent optimizes the reward
+I wrote, not what I meant. A natural next experiment is a reward that punishes the angle more
+strongly, for example `-angle^2`. For comparison, the hand-written PD controller holds the rod
+nearly upright. PPO's resting angle also changes between training runs: on another run of the
+same script it rested at about 1.5 degrees.

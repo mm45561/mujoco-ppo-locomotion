@@ -20,8 +20,8 @@ A rod on a hinge with a weak motor learns to balance itself upright from reward 
 |---|---|
 | Random torques | 29.7 |
 | Hand-written PD controller | 200 |
-| REINFORCE policy | reaches 200 after about 40 updates, with occasional dips |
-| PPO policy | reaches 200 after about 60 updates and stays there |
+| REINFORCE policy | survives 200 steps after about 40 updates, but rests tilted at about 21 degrees |
+| PPO policy | survives 200 steps after about 60 updates and rests close to upright (about 7 degrees) |
 
 ## Next
 - Train the Microduck walking policy with Mjlab (MuJoCo Warp) and PPO
